@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -37,13 +38,25 @@ class AuthController extends Controller
         // Intentar autenticar
         if (Auth::attempt($credentials, $request->has('remember'))) {
             $request->session()->regenerate();
-            
-            // Actualizar estado online del usuario
+
             $user = Auth::user();
+
+            // Requerir verificación de correo para entrar al chat
+            if (! $user->hasVerifiedEmail()) {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return redirect()->route('login')->withErrors([
+                    'email' => 'Debes verificar tu correo antes de iniciar sesión. Te enviamos un enlace de verificación al registrarte.',
+                ])->with('unverified_email', $credentials['email']);
+            }
+
+            // Actualizar estado online del usuario
             $user->is_online = true;
             $user->last_seen = now();
             $user->save();
-            
+
             return redirect()->intended('/chats');
         }
 
@@ -59,7 +72,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $user = Auth::user();
-        
+
         if ($user) {
             // Actualizar estado offline
             $user->is_online = false;
@@ -104,8 +117,8 @@ class AuthController extends Controller
             'is_online' => false,
         ]);
 
-        Auth::login($user);
+        event(new Registered($user));
 
-        return redirect('/chats');
+        return redirect()->route('login')->with('status', 'Registro exitoso. Revisa tu correo para verificar tu cuenta antes de iniciar sesión.');
     }
 }

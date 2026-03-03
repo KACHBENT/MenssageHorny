@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Si la petición no empieza con /public, redirigir internamente a public/
+    # (sin validar archivos/carpetas en raíz para evitar 403 en /storage/*)
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
