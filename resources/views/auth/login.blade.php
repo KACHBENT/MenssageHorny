@@ -13,6 +13,21 @@
                 <p class="text-muted">Inicia sesión para continuar</p>
             </div>
 
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">{{ session('status') }}</div>
+            @endif
+
+            @if (session('unverified_email'))
+                <div class="alert alert-warning" role="alert">
+                    Tu cuenta no está verificada.
+                    <form class="mt-2" method="POST" action="{{ route('verification.resend-unverified') }}">
+                        @csrf
+                        <input type="hidden" name="email" value="{{ session('unverified_email') }}">
+                        <button type="submit" class="btn btn-sm btn-outline-warning">Reenviar correo de verificación</button>
+                    </form>
+                </div>
+            @endif
+
             <!-- Formulario de Login -->
             <form method="POST" action="{{ route('login') }}" id="loginForm">
                 @csrf
