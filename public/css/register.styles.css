@@ -1,0 +1,32 @@
+.chat-wrapper {
+    display: flex ;
+    border-radius: 25px ;
+    align-content: center ;
+    justify-content: center ;
+    align-items: center ;
+    height: inherit;
+    padding: 2em;
+}
+
+.card {
+    width: 650px;
+    border-radius: 35px;
+}
+
+@media(max-width: 685px){
+    .card{
+        width: 480px;
+    }
+
+}
+
+@media(max-width: 500px){
+    .card{
+        width: 320px;
+       
+    }
+    .chat-wrapper{
+         padding: 0.5em;
+    }
+
+}
