@@ -35,6 +35,14 @@
                         </div>
                     @endif
                 </div>
+                
+                <div style="text-align:center; margin-bottom:20px;">
+
+    <a href="/download-apk" class="btn btn-success">
+        📱 Descargar App Móvil
+    </a>
+
+</div>
 
                 <!-- Formulario de Login -->
                 <form method="POST" action="{{ route('login') }}" id="loginForm">

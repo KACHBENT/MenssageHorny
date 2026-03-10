@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
+ use App\Http\Controllers\GroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+
 // Opcional: rutas de registro
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -39,7 +41,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/messages/send-file', [ChatController::class, 'sendFile'])->name('messages.send-file');
     Route::get('/messages/unread', [ChatController::class, 'getUnreadCount'])->name('messages.unread');
     Route::post('/messages/mark-read', [ChatController::class, 'markAsRead'])->name('messages.mark-read');
+    Route::post('/groups/create', [GroupController::class, 'createGroup']);
+   
 
+Route::post('/groups/create',[GroupController::class,'createGroup'])->middleware('auth');
     // Búsqueda
     Route::get('/search/users', [ChatController::class, 'searchUsers'])->name('chat.search');
 
@@ -81,3 +86,14 @@ Route::get('/chat/messages/{conversation}/since/{lastMessageId}', function ($con
 
     return response()->json($messages);
 })->middleware('auth')->name('messages.new');
+
+
+Route::get('/download-apk', function () {
+    $path = public_path('apk/chat.apk');
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    return response()->download($path, 'MenssageHornyChat.apk');
+});
