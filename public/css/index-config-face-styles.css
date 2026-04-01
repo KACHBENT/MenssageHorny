@@ -1,0 +1,82 @@
+.container-capture-face {
+    display: block;
+    justify-items: center;
+    align-content: center;
+    margin: 0;
+    width: 235px;
+    height: 200px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    box-shadow: 12px 12px 2px 1px #00000061;
+}
+
+.btn-settings-faces {
+    display: flex;
+    background: linear-gradient(155deg, rgba(245, 245, 245, 0.796), #00a884, #128c7e);
+    border: 0.5px solid #075E54;
+    width: 220px;
+    height: 180px;
+    justify-content: center;
+    border-radius: 20px;
+
+    transform: rotate(-10deg);
+    transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.settingFaces {
+    display: flex;
+    width: 120px;
+    height: auto;
+    transform: rotate(360deg);
+    transition: transform 0.4s ease;
+}
+
+.btn-settings-faces:hover {
+    background: linear-gradient(155deg, rgba(245, 245, 245, 0.796), #075E54, #128c7e);
+    border: 0.5px solid #075E54;
+    justify-content: center;
+    border-radius: 20px;
+
+    transform: rotate(0deg);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.card {
+    min-width: 560px;
+    min-height: 436px;
+}
+
+.container-photo {
+    margin-bottom: 55px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.container-main {
+    display: flex;
+    padding: 10em;
+}
+
+
+@media(max-width: 550px) {
+    .container-capture-face {
+        width: 150px !important;
+        height: 140px !important;
+    }
+
+    .btn-settings-faces {
+        width: 130px !important;
+        height: 120px !important;
+    }
+
+    .card {
+        min-width: 200px;
+        min-height: 240px;
+    }
+
+    .container-main {
+        display: flex;
+        padding: 8em 6px 8em 5px !important;
+    }
+
+}
