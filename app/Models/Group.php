@@ -20,17 +20,23 @@ class Group extends Model
         'description'
     ];
 
+<<<<<<< HEAD
     /**
      * Usuario que creó el grupo
      */
+=======
+>>>>>>> main
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
     }
 
+<<<<<<< HEAD
     /**
      * Usuarios que pertenecen al grupo
      */
+=======
+>>>>>>> main
     public function users()
     {
         return $this->belongsToMany(
@@ -38,14 +44,28 @@ class Group extends Model
             'group_users',
             'group_id',
             'user_id'
+<<<<<<< HEAD
         )->withTimestamps();
     }
 
     /**
      * Mensajes del grupo
      */
+=======
+        )->withPivot('role')->withTimestamps();
+    }
+
+>>>>>>> main
     public function messages()
     {
         return $this->hasMany(GroupMessage::class, 'group_id');
     }
+<<<<<<< HEAD
+=======
+
+    public function lastMessage()
+    {
+        return $this->hasOne(GroupMessage::class, 'group_id')->latestOfMany();
+    }
+>>>>>>> main
 }

@@ -68,7 +68,11 @@
 
                                 <tr>
                                     <td style="font-size:14px; font-weight:700; color:#4b5563; padding-top:20px; padding-bottom:8px;">
+<<<<<<< HEAD
                                         Contraseña temporal
+=======
+                                        Contraseña
+>>>>>>> main
                                     </td>
                                 </tr>
                                 <tr>
@@ -93,7 +97,11 @@
                                 <tr>
                                     <td style="background-color:#f8fafc; border:1px solid #e5e7eb; border-radius:10px; padding:14px 16px; font-size:13px; color:#6b7280; line-height:1.7; text-align:center;">
                                         <strong style="color:#374151;">Importante:</strong>
+<<<<<<< HEAD
                                         esta contraseña es temporal. Por seguridad, cámbiala después de iniciar sesión.
+=======
+                                        esta contraseña. Por seguridad, cámbiala después de iniciar sesión.
+>>>>>>> main
                                     </td>
                                 </tr>
                             </table>
