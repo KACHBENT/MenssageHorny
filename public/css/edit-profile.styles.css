@@ -1,0 +1,21 @@
+.chat-wrapper {
+    justify-content: center !important;
+}
+
+.card-body {
+    padding: 35px 40px 35px 40px;
+}
+
+.card{
+    border-radius: 25px;
+}
+
+.card-header:first-child {
+    border-radius: calc(2.25rem - 1px) calc(3.25rem - 1px) 0 0 !important;
+} 
+
+.button-avatar{
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+}

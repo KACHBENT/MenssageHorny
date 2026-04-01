@@ -1,0 +1,236 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+.main {
+    min-height: 100vh;
+    padding: 1rem 2rem 3rem 2rem;
+}
+
+.chat-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 1rem 0 2rem 0;
+}
+
+.card {
+    width: min(100%, 650px) !important;
+    max-width: 650px !important;
+    border-radius: 35px !important;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 2rem !important;
+}
+
+.form-check-input:checked {
+    background-color: #15913a;
+    border-color: #0dfd1d;
+}
+
+.btn-outline-secondary {
+    color: #6c757d;
+    border-color: #ced4da !important;
+}
+
+.form-control:focus {
+    color: #212121 !important;
+    background-color: #fff !important;
+    border-color: #15913a !important;
+    outline: 0 !important;
+    box-shadow: 0 0 0 .25rem rgba(13, 254, 53, 0.25) !important;
+}
+
+.form-select:focus {
+    box-shadow: 0 0 0 .25rem rgba(13, 254, 53, 0.25) !important;
+}
+
+/* BOTÓN DESCARGA */
+.button-download {
+    display: block;
+    width: 100%;
+}
+
+/* TEXTO BIOMÉTRICO */
+.text-info-finger-print {
+    display: inline-block;
+}
+
+/* BOTÓN FACE */
+.button-face-print {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    background: linear-gradient(331deg, #1c1e1ec9 0%, #128c7e 100%) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button-face-print:hover {
+    transform: scale(1.12);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* BOTÓN FINGER */
+.button-finger-print {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    background: linear-gradient(331deg, #1c1e1ec9 0%, #128c7e 100%) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button-finger-print:hover {
+    transform: scale(1.12);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* ÍCONOS */
+.icon-finger-print,
+.icon-face-print {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+}
+
+.button-face-print:hover .icon-finger-print,
+.button-finger-print:hover .icon-face-print {
+    transform: scale(1.1);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+    .main {
+        padding: 1rem 1rem 2rem 1rem;
+    }
+
+    .card {
+        width: min(100%, 560px) !important;
+    }
+}
+
+@media (max-width: 685px) {
+    .main {
+        padding: 0.75rem;
+    }
+
+    .chat-wrapper {
+        padding: 0.75rem 0 1.5rem 0;
+    }
+
+    .card {
+        width: min(100%, 480px) !important;
+        border-radius: 28px !important;
+    }
+
+    .card-body {
+        padding: 1.25rem !important;
+    }
+
+    .button-download {
+        display: none;
+    }
+
+    .button-finger-print {
+        display: flex;
+    }
+
+    .text-info-finger-print {
+        display: inline-block;
+    }
+
+    .icon-finger-print,
+    .icon-face-print {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    .main {
+        padding: 0.5rem;
+    }
+
+    .chat-wrapper {
+        padding: 0.5rem 0 1rem 0;
+    }
+
+    .card {
+        width: 100% !important;
+        max-width: 340px !important;
+        border-radius: 22px !important;
+    }
+
+    .card-body {
+        padding: 1rem !important;
+    }
+
+    .button-download {
+        display: none;
+    }
+
+    .button-finger-print {
+        display: flex;
+    }
+
+    .text-info-finger-print {
+        display: inline-block;
+    }
+
+    .icon-finger-print,
+    .icon-face-print {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* Para pantallas con poca altura */
+@media (max-height: 800px) {
+    .main {
+        padding-top: 0.5rem;
+    }
+
+    .chat-wrapper {
+        align-items: flex-start;
+        padding-top: 0.5rem;
+    }
+
+    .card {
+        margin-top: 0;
+    }
+
+    .card-body {
+        padding-top: 1.25rem !important;
+        padding-bottom: 1.25rem !important;
+    }
+}

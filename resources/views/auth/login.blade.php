@@ -1,0 +1,161 @@
+@extends('layouts.app')
+
+@section('title', 'Iniciar Sesión')
+
+@section('content')
+<link rel="stylesheet" href="{{ asset('css/login.styles.css') }}">
+
+<div class="w-100 h-100 d-flex align-items-center justify-content-center main">
+    <div class="card shadow">
+        <div class="card-body p-5">
+            <!-- Logo -->
+            <div class="text-center mb-4">
+                <img src="{{ asset('image/logo.png') }}" alt="WhatsApp" width="64">
+                <h3 class="mt-3 fw-bold" style="color: var(--whatsapp-teal);">WhatsApp-Sistemas</h3>
+                <p class="text-muted">Inicia sesión para continuar</p>
+                @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
+
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0 ps-3">
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+            </div>
+            <div style="text-align:center; margin-bottom:20px;">
+                <div class="container container-access-biometric d-flex gap-4 justify-content-center mb-2">
+                    <a href="{{ route('biometric.login') }}" class="btn btn-chat button-finger-print">
+                        <img src="{{ asset('image/icons/fingerprint.svg') }}" alt="fingerPrints" class="white icon-finger-print">
+                    </a>
+                    <a href="{{ route('settingfaces.loginaccessface') }}" class="btn btn-chat button-face-print">
+                        <img src="{{ asset('image/icons/ar_on_you.svg') }}" alt="settingFaces" class="white icon-face-print">
+                    </a>
+                </div>
+                <div class="mt-2">
+                    <p class="text-center text-muted text-info-finger-print">
+                        Acceder con datos biometricos.
+                    </p>
+                </div>
+                <a href="/download-apk" class="btn btn-chat button-download">
+                    Descargar App Móvil
+                </a>
+            </div>
+            <!-- Formulario de Login -->
+            <form method="POST" action="{{ route('login') }}" id="loginForm">
+                @csrf
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-medium">
+                        <i class="fas fa-envelope me-2 text-muted"></i>Email
+                    </label>
+                    <input type="email" class="form-control form-control-lg @error('email') is-invalid @enderror"
+                        id="email" name="email" value="{{ old('email') }}" placeholder="tu@email.com" required
+                        autofocus>
+                    @error('email')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Password -->
+                <div class="mb-4">
+                    <label for="password" class="form-label fw-medium">
+                        <i class="fas fa-lock me-2 text-muted"></i>Contraseña
+                    </label>
+                    <div class="input-group">
+                        <input type="password"
+                            class="form-control form-control-lg @error('password') is-invalid @enderror" id="password"
+                            name="password" placeholder="••••••••" required>
+                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    @error('password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Remember Me -->
+                <div class="mb-4 form-check">
+                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                    <label class="form-check-label" for="remember">Recordarme</label>
+                </div>
+
+                <!-- Botón Login -->
+                <button type="submit" class="btn btn-chat w-100 py-3 fw-bold" id="loginBtn">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    <span>Iniciar Sesión</span>
+                </button>
+            </form>
+
+            <!-- Registro (opcional) -->
+            <div class="text-center mt-4">
+                <p class="text-muted mb-0">¿No tienes cuenta?</p>
+                <a href="{{ route('register') }}" class="text-decoration-none" style="color: var(--whatsapp-green);">
+                    Regístrate aquí
+                </a>
+            </div>
+            <div class="mb-3 text-center">
+                <a href="{{ route('password.request') }}" class="text-decoration-none" style="color: var(--whatsapp-green);">
+                    ¿Olvidaste tu contraseña?
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+@endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        // Toggle password visibility
+        $('#togglePassword').click(function() {
+            const password = $('#password');
+            const icon = $(this).find('i');
+
+            if (password.attr('type') === 'password') {
+                password.attr('type', 'text');
+                icon.removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                password.attr('type', 'password');
+                icon.removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+
+        // Test users autofill
+        $('.test-user').click(function() {
+            const email = $(this).data('email');
+            const pass = $(this).data('pass');
+
+            $('#email').val(email);
+            $('#password').val(pass);
+
+            // Opcional: auto-submit
+            // $('#loginForm').submit();
+        });
+
+        // Loading state on submit
+        $('#loginForm').submit(function() {
+            const btn = $('#loginBtn');
+            btn.prop('disabled', true);
+            btn.find('span').text('Iniciando sesión...');
+            btn.append('<span class="spinner-border spinner-border-sm ms-2"></span>');
+        });
+    });
+</script>
+@endpush
